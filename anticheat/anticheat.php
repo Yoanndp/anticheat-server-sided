@@ -1,7 +1,6 @@
 <?php
 /*
 Anticheat server sided for GDPSes made by Yoanndp
-To get it to work, edit getGJScores**.php (where ** is the game version) and add this
 */
 class Anticheat{
     public function check($accountID){
