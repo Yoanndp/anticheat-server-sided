@@ -1,13 +1,13 @@
 Anticheat Server Sided
 ===================
-This is a simple anticheat server sided for GDPSes. 
+This is a simple anticheat server sided for GDPS's. (compatible with CvoltonGDPS source)
 
 ----------
 
 
 Its functioning
 -------------
- It has multiple actions:
+It performs multiple actions:
 
  >- It considers the total amount of stars from all online levels.
  >- It considers the total amount of stars from all map packs.
@@ -29,4 +29,4 @@ if($ac->check($accountID)){
 }
 ```
 -------------
-<a name="local">1</a>: For next updates, this value is modifiable (in case of new local levels)
+<a name="local">1</a>: For next updates, this value will be modifiable (in case of new local levels)
