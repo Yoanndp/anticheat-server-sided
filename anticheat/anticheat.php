@@ -102,6 +102,10 @@ class Anticheat{
         //Online levels demon
         $q = $db->query("SELECT count(levelID) FROM levels WHERE starDemon = 1");
         $totalDemons += $q->fetchColumn();
+        
+        //Map packs
+        $q = $db->query("SELECT count(ID) FROM mappacks WHERE difficulty = 6");
+        $totalDemons += $q->fetchColumn();
 
         return $totalDemons;
     }
