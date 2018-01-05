@@ -117,5 +117,36 @@ class Anticheat{
         $q = $db->prepare("UPDATE users SET isBanned = 1 WHERE extID = :accountid");
         $q->execute([":accountid" => $accountID]);
     }
+    
+    static public function logging($accountID){
+        chdir(dirname(__FILE__));
+        require "../connection.php";
+
+        $q = $db->prepare("SELECT stars FROM users WHERE extID = :accid");
+        $q->execute([":accid" => $accountID]);
+        $stars = $q->fetchColumn();
+
+        $q = $db->prepare("SELECT coins FROM users WHERE extID = :accid");
+        $q->execute([":accid" => $accountID]);
+        $coins = $q->fetchColumn();
+
+        $q = $db->prepare("SELECT userCoins FROM users WHERE extID = :accid");
+        $q->execute([":accid" => $accountID]);
+        $usercoins = $q->fetchColumn();
+
+        $q = $db->prepare("SELECT demons FROM users WHERE extID = :accid");
+        $q->execute([":accid" => $accountID]);
+        $demons = $q->fetchColumn();
+
+        $q = $db->prepare("REPLACE INTO anticheatLogs(pk_accountID, stars, demons, coins, usercoins, IP) VALUES (:accountid, :stars, :demons, :coins, :usercoins, :ip)");
+        $q->execute([
+            ":accountid" => $accountID,
+            ":stars" => $stars,
+            ":demons" => $demons,
+            ":coins" => $coins,
+            ":usercoins" => $usercoins,
+            ":ip" => $_SERVER["REMOTE_ADDR"]
+        ]);    
+    }
 }
 ?>
