@@ -25,6 +25,7 @@ Get it to work
 require "anticheat/anticheat.php";
 $ac = new Anticheat();
 if($ac->check($accountID)){
+	Anticheat::logging($accountID);
 	$ac->ban_by_accountID($accountID);
 }
 ```
