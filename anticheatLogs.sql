@@ -13,7 +13,7 @@
 
 -- Export de la structure de la table gdps21. anticheatlogs
 CREATE TABLE IF NOT EXISTS `anticheatlogs` (
-  `pk_accountID` int(11) NOT NULL,
+  `pk_accountID` VARCHAR(50) NOT NULL,
   `stars` int(11) NOT NULL,
   `demons` int(11) NOT NULL,
   `coins` int(11) NOT NULL,
