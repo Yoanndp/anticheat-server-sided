@@ -26,7 +26,7 @@ class Anticheat{
         $q->execute([":accid" => $accountID]);
         $demons = $q->fetchColumn();
         
-        return ($stars > $starsLimit) || ($coins > $coinsLimit) || ($usercoins > $userCoinsLimit) || ($demons > $demonsLimit);
+        return ($stars > $starsLimit) || ($coins > $coinsLimit) || ($usercoins > $userCoinsLimit) || ($demons > $demonsLimit) || ($stars<$demons*10);
     }
 
     static public function get_total_of_stars(){
