@@ -1,6 +1,6 @@
 <?php
 /*
-Anticheat server sided for GDPS's made by Yoanndp
+Anticheat server sided for GDPS made by Yoanndp
 */
 class Anticheat{
     public function check($accountID){
@@ -41,13 +41,11 @@ class Anticheat{
         $totalStars += $_s["anticheat"]["stars"]["margin"];
 
         //online levels stars
-        $q = $db->query("SET @amount := 0");
-        $q = $db->query("SELECT @amount := @amount + starStars AS amount FROM levels WHERE starStars > 0 ORDER BY amount DESC LIMIT 1");
+        $q = $db->query("SELECT SUM(starStars) FROM levels WHERE starStars > 0");
         $totalStars += $q->fetchColumn();
 
         //map packs stars
-        $q = $db->query("SET @amount := 0");
-        $q = $db->query("SELECT @amount := @amount + stars AS amount FROM mappacks WHERE stars > 0 ORDER BY amount DESC LIMIT 1");
+        $q = $db->query("SELECT SUM(stars) FROM mappacks WHERE stars > 0");
         $totalStars += $q->fetchColumn();
 
         return $totalStars;        
@@ -65,8 +63,7 @@ class Anticheat{
         $totalCoins += $_s["anticheat"]["coins"]["margin"];
 
         //map packs coins
-        $q = $db->query("SET @amount := 0");
-        $q = $db->query("SELECT @amount := @amount + coins AS amount FROM mappacks WHERE stars > 0 ORDER BY amount DESC LIMIT 1");
+        $q = $db->query("SELECT SUM(coins) FROM mappacks WHERE stars > 0");
         $totalCoins += $q->fetchColumn();
 
         return $totalCoins;
@@ -81,8 +78,7 @@ class Anticheat{
         $totalUserCoins = $_s["anticheat"]["usercoins"]["margin"];
 
         //Online levels usercoins
-        $q = $db->query("SET @amount := 0");
-        $q = $db->query("SELECT @amount := @amount + coins AS amount FROM levels WHERE starCoins = 1 ORDER BY amount DESC LIMIT 1");
+        $q = $db->query("SELECT SUM(coins) FROM levels WHERE starCoins = 1");
         $totalUserCoins += $q->fetchColumn();
 
         return $totalUserCoins;
@@ -102,7 +98,7 @@ class Anticheat{
         //Online levels demon
         $q = $db->query("SELECT count(levelID) FROM levels WHERE starDemon = 1");
         $totalDemons += $q->fetchColumn();
-        
+
         //Map packs
         $q = $db->query("SELECT count(ID) FROM mappacks WHERE difficulty = 6");
         $totalDemons += $q->fetchColumn();
@@ -117,7 +113,7 @@ class Anticheat{
         $q = $db->prepare("UPDATE users SET isBanned = 1 WHERE extID = :accountid");
         $q->execute([":accountid" => $accountID]);
     }
-    
+
     static public function logging($accountID){
         chdir(dirname(__FILE__));
         require "../connection.php";
