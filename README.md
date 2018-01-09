@@ -12,7 +12,7 @@ It performs multiple actions:
  >- It considers the total amount of stars, usercoins and demons from all online levels.
  >- It considers the total amount of stars, coins and difficulty from all map packs.
  >- It considers the total amount of stars from **local levels**<sup>[1](#local)</sup> (Stereo madness to Fingerdash).
- >- It has a star margin.
+ >- It has a star margin and a logging table.
 
 
 Get it to work
